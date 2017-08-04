@@ -2,7 +2,7 @@ import sys
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-browser = webdriver.Chrome()
+browser = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver')
 ADDRESS = 'http://192.168.1.22'
 if len(sys.argv) == 3:
     ADDRESS = sys.argv[1]
