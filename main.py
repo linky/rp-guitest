@@ -62,7 +62,9 @@ def runApps(_apps):
             # run Application
             if text == app:
                 print('running ' + text + '...')
+                time.sleep(1)
                 item.click()
+                time.sleep(1)
                 browser.get(ADDRESS)
                 break
 
