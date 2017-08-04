@@ -1,16 +1,17 @@
 import sys
+import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 browser = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver')
-ADDRESS = 'http://192.168.1.22'
+ADDRESS = 'http://192.168.1.106'
 if len(sys.argv) == 3:
     ADDRESS = sys.argv[1]
     if sys.argv[2] == 'firefox':
         browser = webdriver.Firefox()
 
 # loading time limit
-browser.implicitly_wait(10)
+browser.implicitly_wait(30)
 
 def loadingTime(_url):
     browser.get(_url)
@@ -21,7 +22,7 @@ def loadingTime(_url):
 def skipDialog():
     # click on background image
     mt = browser.find_element_by_id('main_content')
-    mt.click()
+    #mt.click()
 
 def getItems(_groups):
     # traverse all groups all application in the groups
@@ -31,7 +32,9 @@ def getItems(_groups):
             text = app.find_element_by_class_name('app-name').text
             # open group
             if text == group:
+                time.sleep(1)
                 app.click()
+                time.sleep(1)
                 # get all apps in the current group
                 group_apps = browser.find_elements_by_class_name('app-item')
                 for group_app in reversed(group_apps):
@@ -66,7 +69,7 @@ def runApps(_apps):
 lt = loadingTime(ADDRESS)
 print(lt)
 
-#skipDialog()
+skipDialog()
 
 getItems([None, 'System', 'Development'])
 
